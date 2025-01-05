@@ -1,31 +1,38 @@
+// Esta es mi función que suma dos números
+const sum = (a,b) => {
+    return a + b
+}
+
+// Solo un registro en consola para nosotros
+console.log(sum(7,3))
+
+// Exporta la función para usarla en otros archivos 
+// (similar a la palabra clave "export" cuando se usa webpack)
+module.exports = { sum };
 
 
-// Declaramos una función con el nombre exacto "formEuroToDollar"
-const fromEuroToDollar = function(valueInEuro) {
-    // Convertimos el valor a dólares
-    let valueInDollar = valueInEuro * 1.07;
-    // Retornamos el valor en dólares
-    return valueInDollar;
+
+let oneEuroIs = {
+    "JPY": 156.5,
+    "USD": 1.07,
+    "GBP": 0.87,
 }
 
 function fromDollarToYen(dollars) {
-    const exchangeRateYen = oneEuroIs["JPY"] / oneEuroIs["USD"];
-    const amountInYen = dollars * exchangeRateYen;
-    return amountInYen;
+    let euros = dollars / oneEuroIs.USD;
+    let yenes = euros * oneEuroIs.JPY;
+    return yenes;
+}
+
+function fromEuroToDollar(euros) {
+    return euros * oneEuroIs.USD;
+}
+
+function fromYenToPound(yenes) {
+    let euros = yenes / oneEuroIs.JPY;
+    let pounds = euros * oneEuroIs.GBP;
+    return pounds;
 }
 
 
-function fromYenToPound(yen) {
-    const exchangeRatePound = oneEuroIs["GBP"] / oneEuroIs["JPY"];
-    const amountInPound = yen * exchangeRatePound;
-    return amountInPound;
-}
-
-
-console.log(fromDollarToYen(100)); 
-console.log(fromYenToPound(5000)); 
-// Tenemos que incluir la función en el exports para que sea exportada a otros archivos como test.js
-module.exports = { sum, fromEuroToDollar }
-
-
-console.log("hello world")
+module.exports = { sum, fromDollarToYen, fromEuroToDollar, fromYenToPound };
